@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Generate a list with URLS containing references to all Real Python articles.
+# No arguments are needed.
+# Result can be dumped in a TXT file to be used as input for the Python program.
+
 BASE_URL="https://realpython.com"
 
 function control_c() {

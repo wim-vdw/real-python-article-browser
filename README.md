@@ -12,18 +12,19 @@ This can be done by running the following script and dump the results in a TXT f
 ```
 $ ./generate_urls.sh > urls.txt
 ```
-Help screen of the Python program:
+## Help screen of the Python program
 ```
 $ python generate_articles.py --help
-usage: generate_articles.py [-h] [--print] [--html] url_file
+usage: generate_articles.py [-h] [--version] [--print] [--html] url_file
 
 Real Python article overview generator.
 
 positional arguments:
-  url_file    Input file with URLs.
+  url_file    input file with URLs.
 
 optional arguments:
   -h, --help  show this help message and exit
-  --print     Display raw format list.
-  --html      Display HTML content.
+  --version   show program's version number and exit
+  --print     display raw format list
+  --html      display HTML content
 ```

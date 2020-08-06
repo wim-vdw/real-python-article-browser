@@ -60,9 +60,9 @@ def main():
     """Main function."""
     parser = argparse.ArgumentParser(description='Real Python article overview generator.')
     parser.add_argument('--version', action='version', version=VERSION)
-    parser.add_argument('url_file', help='Input file with URLs.')
-    parser.add_argument('--print', action='store_true', help='Display raw format list.')
-    parser.add_argument('--html', action='store_true', help='Display HTML content.')
+    parser.add_argument('url_file', help='input file with URLs')
+    parser.add_argument('--print', action='store_true', help='display raw format list')
+    parser.add_argument('--html', action='store_true', help='display HTML content')
     args = parser.parse_args()
     try:
         urls = read_data(args.url_file)

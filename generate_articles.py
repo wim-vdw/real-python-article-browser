@@ -10,6 +10,15 @@ from bs4 import BeautifulSoup
 
 BASE_URL = 'https://realpython.com'
 VERSION = '1.0.0'
+HTML_INTRO = '''<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Real Python articles</title>
+    </head>
+    <body>
+        <ol>
+'''
 
 
 def read_data(input_file):
@@ -32,7 +41,8 @@ def retrieve_articles(urls):
             url = BASE_URL + elem.find_previous('a').get('href')
             date = elem.find_next('span').text
             try:
-                join = True if 'fa-star' in elem.find_next('i').attrs['class'] else False
+                tmp = elem.find_next('i').attrs['class']
+                join = True if 'fa-star' in tmp else False
             except AttributeError:
                 join = False
             result.append((title, url, date, join))
@@ -47,22 +57,33 @@ def print_articles(articles):
 
 def generate_html(articles):
     """Generate HTML content for articles."""
-    html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Real Python articles</title><head><body><ol>'
+    html = HTML_INTRO
     for article in articles:
-        html += f'<li><a href="{article[1]}">{article[0]}</a>'
+        html += f'            <li><a href="{article[1]}">{article[0]}</a>'
         if article[3]:
             html += '<b> ! JOIN !</b>'
-    html += '</ol></body></html>'
+        html += '\n'
+    html += '        </ol>\n'
+    html += '    </body>\n'
+    html += '</html>\n'
     print(html)
 
 
 def main():
-    """Main function."""
-    parser = argparse.ArgumentParser(description='Real Python article overview generator.')
-    parser.add_argument('--version', action='version', version=VERSION)
-    parser.add_argument('url_file', help='input file with URLs')
-    parser.add_argument('--print', action='store_true', help='display raw format list')
-    parser.add_argument('--html', action='store_true', help='display HTML content')
+    """Parse arguments and generate report."""
+    parser = argparse.ArgumentParser(
+        description='Real Python article overview generator.')
+    parser.add_argument('--version',
+                        action='version',
+                        version=VERSION)
+    parser.add_argument('url_file',
+                        help='input file with URLs')
+    parser.add_argument('--print',
+                        action='store_true',
+                        help='display raw format list')
+    parser.add_argument('--html',
+                        action='store_true',
+                        help='display HTML content')
     args = parser.parse_args()
     try:
         urls = read_data(args.url_file)

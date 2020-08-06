@@ -9,6 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 
 BASE_URL = 'https://realpython.com'
+VERSION = '1.0.0'
 
 
 def read_data(input_file):
@@ -57,7 +58,8 @@ def generate_html(articles):
 
 def main():
     """Main function."""
-    parser = argparse.ArgumentParser(description='Real Python article browser.')
+    parser = argparse.ArgumentParser(description='Real Python article overview generator.')
+    parser.add_argument('--version', action='version', version=VERSION)
     parser.add_argument('url_file', help='Input file with URLs.')
     parser.add_argument('--print', action='store_true', help='Display raw format list.')
     parser.add_argument('--html', action='store_true', help='Display HTML content.')

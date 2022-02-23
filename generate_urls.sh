@@ -14,7 +14,7 @@ function control_c() {
 trap control_c SIGINT
 
 function get_data() {
-  result=$(http https://realpython.com/ | grep ic-append-from | cut -d"\"" -f4)
+  result=$(curl --silent https://realpython.com/ | grep ic-append-from | cut -d"\"" -f4)
   echo "$BASE_URL"
 
   while true; do
